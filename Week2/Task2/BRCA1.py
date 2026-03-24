@@ -1,17 +1,18 @@
-input_dosya = "brca1.fasta"
-output_dosya = "brca1_minus_strand.fasta"
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+input_dosya = os.path.join(script_dir, "brca1.fasta")
+output_dosya = os.path.join(script_dir, "brca1_minus_strand.fasta")
 
 with open(input_dosya, "r") as f:
     satirlar = f.readlines()
 
-dna_dizisi = ""
-for satir in satirlar:
-    if not satir.startswith(">"):
-        dna_dizisi += satir.strip()
+dna_dizisi_parts = [satir.strip() for satir in satirlar if isinstance(satir, str) and not satir.startswith(">")]
+dna_dizisi = "".join(dna_dizisi_parts)
 
 harita = str.maketrans("ATCG", "TAGC")
-tamamlayici = dna_dizisi.translate(harita)
-ters_tamamlayici = tamamlayici[::-1]
+tamamlayici = str(dna_dizisi).translate(harita)
+ters_tamamlayici = "".join(reversed(tamamlayici))
 
 with open(output_dosya, "w") as f_out:
     f_out.write(ters_tamamlayici)

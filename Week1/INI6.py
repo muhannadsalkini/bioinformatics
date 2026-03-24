@@ -1,4 +1,7 @@
-dosya_yolu = "rosalind_ini6.txt"
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+dosya_yolu = os.path.join(script_dir, "rosalind_ini6.txt")
 
 with open(dosya_yolu, "r") as f:
     kelimeler = f.read().split()

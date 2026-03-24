@@ -4,4 +4,6 @@ b = 92
 c = 114
 d = 122
 
-print(s[a:b+1], s[c:d+1])
+s1 = "".join(s[i] for i in range(a, b+1))
+s2 = "".join(s[i] for i in range(c, d+1))
+print(s1, s2)
